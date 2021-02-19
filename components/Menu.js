@@ -6,10 +6,10 @@ let menuItems = [
   "What's New",
   'Tech Trends',
   'Music',
-  'Log Out'
+  'Log Out',
 ];
 
-/* 
+/*
   Step 1: Write a component called 'menuMaker' to create a menu like the markup below:
 
   <div class="menu">
@@ -28,6 +28,28 @@ let menuItems = [
   Step 4: Add a click event listener to the menu button. When clicked it should toggle the class 'menu--open' on div.menu (your div with a 'menu' class).
 
   Step 5: Don't forget to return your div.menu.
-
-  Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
 */
+function menuMaker(menuItems) {
+  let menu = document.createElement('div');
+  menu.classList.add('menu');
+
+  let menuList = document.createElement('ul');
+  menuItems.forEach((menuItem) => {
+    let menuItemLi = document.createElement('li');
+    menuItemLi.textContent = menuItem;
+    menuList.appendChild(menuItemLi);
+  });
+
+  menu.appendChild(menuList);
+
+  let menuButton = document.querySelector('.menu-button');
+  menuButton.addEventListener('click', () => {
+    menu.classList.toggle('menu--open');
+  });
+
+  return menu;
+}
+
+// Step 6: Use 'menuMaker' to create a menu using the 'menuItems' array, and append the returned menu to the header.
+let header = document.querySelector('.header');
+header.appendChild(menuMaker(menuItems));
