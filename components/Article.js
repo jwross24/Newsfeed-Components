@@ -44,13 +44,26 @@ function articleMaker(articleData) {
   });
 
   let expandButton = document.createElement('span');
-  expandButton.textContent = '+';
+  expandButton.textContent = 'Click to Expand';
   expandButton.classList.add('expandButton');
 
-  expandButton.addEventListener('click', () => {
-    article.classList.toggle('article-open');
+  let closeButton = document.createElement('span');
+  closeButton.textContent = 'Click to Close';
+  closeButton.classList.add('close', 'hidden');
+
+  expandButton.addEventListener('click', function () {
+    article.classList.add('article-open');
+    this.classList.add('hidden');
+    closeButton.classList.remove('hidden');
   });
   article.appendChild(expandButton);
+
+  closeButton.addEventListener('click', function () {
+    article.classList.remove('article-open');
+    this.classList.add('hidden');
+    expandButton.classList.remove('hidden');
+  });
+  article.appendChild(closeButton);
 
   return article;
 }
